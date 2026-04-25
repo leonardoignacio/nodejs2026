@@ -1,22 +1,20 @@
 const express = require('express')
-var app = express()
-var porta = '3200'
+const app = express()
+const PORT = 3000
 
-app.get('/', function (req, res){
-    res.send('<h1>Tena inicial</h1><p>Olá Mundo</p>')
+app.get('/', (req, res) => {
+  res.send('<h1>Pagina inicial</h1><p>Hello World!</p>')
 })
-app.get('/cadastro', function (req, res){
-    res.send('<h1>Tela de cadastro</h1>')
+app.get('/cadastro', (req, res) => {
+  res.send('<h1>Pagina de cadastro foi acessada</h1>')
 })
-
-app.get('/usuario', function (req, res){
-    res.send('<h1>Tela de usuário</h1>')
+app.get('/usuario', (req, res) => {
+  res.send('<h1>Pagina de usuario foi acessada</h1>')
 })
-
-app.get('/consulta', function (req, res){
-    res.send('<h1>Tela de consulta</h1>')
+app.get('/consulta', (req, res) => {
+  res.send('<h1>Pagina de consulta foi acessada</h1>')
 })
 
-app.listen(porta, function(){
-    console.log(`Servidor rodando em: http://localhost:${porta}`)
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em: http://localhost:${PORT}`)
 })
