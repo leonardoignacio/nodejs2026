@@ -18,10 +18,10 @@ app.get('/cadastrar', (req, res) => res.sendFile(path.join(baseDir, 'cadastrar.h
 // API - Cadastro
 app.post('/cadastrar/pets', async (req, res) => {
     try {
-        const { nome, especie, idadeAproximada, porteTamanho, corPredominante, corSecundaria } = req.body
-        const sql = "INSERT INTO pets (nome, especie, idade_aproximada, porte, cor_predominante, cor_secundaria) VALUES (?,?,?,?,?,?)"
+        const { id_cli, nome, sexo, especie, raca, peso, tamanho, idade, doenca, obs } = req.body
+        const sql = "INSERT INTO pets (id_cli, nome, sexo, especie, raca, peso, tamanho, idade, doenca, obs) VALUES (?,?,?,?,?,?,?,?,?,?)"
         const con = await dbConnection()
-        const [r] = await con.execute(sql, [nome, especie, parseFloat(idadeAproximada), porteTamanho, corPredominante, corSecundaria])
+        const [r] = await con.execute(sql, [id_cli, nome, sexo, especie, raca, parseFloat(peso), tamanho, parseInt(idade), doenca, obs]);
         await con.end()
         res.status(201).json({ status: 201, id: r.insertId })
     } catch (e) {
@@ -55,30 +55,5 @@ app.get('/consultar/pets/:id', async (req, res) => {
     }
 })
 
-// API - Atualização
-app.put('/editar/pets/:id', async (req, res) => {
-    try {
-        const sql = 'UPDATE pets SET nome=?, especie=?, idade_aproximada=?, porte=?, cor_predominante=?, cor_secundaria=? WHERE id = ?'
-        const con = await dbConnection()
-        const [r] = await con.execute(sql, [...Object.values(req.body), req.params.id])
-        await con.end()
-        res.json({ atualizado: !!r.affectedRows })
-    } catch (e) {
-        res.status(400).json({ erro: e.message })
-    }
-})
-
-// API - Exclusão
-app.delete('/excluir/pets/:id', async (req, res) => {
-    try {
-        const con = await dbConnection()
-        const sql = 'DELETE FROM pets WHERE id = ?'
-        const [r] = await con.execute(sql, [req.params.id])
-        await con.end()
-        res.json({ excluido: !!r.affectedRows })
-    } catch (e) {
-        res.status(400).json({ erro: e.message })
-    }
-})
 
 app.listen(PORT, () => console.log(`🚀 http://localhost:${PORT}`))
