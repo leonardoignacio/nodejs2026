@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Pet</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: 40px auto; padding: 20px; }
+        form { display: flex; flex-direction: column; gap: 15px; }
+        div { display: flex; flex-direction: column; }
+        label { font-weight: bold; margin-bottom: 5px; }
+        input, textarea { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        input[type="submit"] { background: #2563eb; color: white; border: none; cursor: pointer; padding: 12px; font-size: 16px; }
+        input[type="submit"]:hover { background: #1d4ed8; }
+        .back { margin-top: 20px; display: block; font-size: 14px; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>🐶 Cadastro de Pet</h1>
+    <form method="POST" action="/cadastrar/pets">
+        <div>
+            <label for="nome">Nome do Pet:</label>
+            <input type="text" name="nome" id="nome" placeholder="Ex: Thor" required>
+        </div>
+        <div>
+            <label for="especie">Espécie:</label>
+            <input type="text" name="especie" id="especie" placeholder="Ex: Cachorro" required>
+        </div>
+        <div>
+            <label for="idadeAproximada">Idade Aproximada:</label>
+            <input type="number" step="0.1" name="idadeAproximada" id="idadeAproximada" placeholder="Ex: 2.5" required>
+        </div>
+        <div>
+            <label for="porteTamanho">Porte:</label>
+            <input type="text" name="porteTamanho" id="porteTamanho" placeholder="Ex: Médio" required>
+        </div>
+        <div>
+            <label for="corPredominante">Cor Predominante:</label>
+            <input type="text" name="corPredominante" id="corPredominante" placeholder="Ex: Marrom" required>
+        </div>
+        <div>
+            <label for="corSecundaria">Cor Secundária:</label>
+            <input type="text" name="corSecundaria" id="corSecundaria" placeholder="Ex: Branco">
+        </div>
+        <input type="submit" value="🚀 Finalizar Cadastro">
+    </form>
+    <a href="/" class="back">← Voltar para Home</a>
+</body>
+</html>
