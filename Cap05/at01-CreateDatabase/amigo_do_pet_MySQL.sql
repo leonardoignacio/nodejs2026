@@ -1,3 +1,4 @@
+-- Instalar o HeidiSQL e iniciar o MySQL no Xampp
 CREATE DATABASE IF NOT EXISTS amigo_do_pet
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
@@ -14,7 +15,22 @@ CREATE TABLE usuarios (
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
-
+-- Criação de um Registro ADMIM na entidade forte
+INSERT INTO usuarios (
+    nome, 
+    cpf, 
+    telefone, 
+    whatsapp, 
+    email, 
+    senha
+) VALUES (
+    'Admin', 
+    '12345678901', 
+    '17991234567', 
+    '17991234567', 
+    'admin.dev@amigosdopet.com', 
+    'teste123'
+);
 -- Tabela de Pets
 CREATE TABLE pets (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

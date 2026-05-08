@@ -15,27 +15,32 @@ app.use(express.urlencoded({ extended: true }))
 
 // Páginas
 app.get('/', (req, res) => res.sendFile(path.join(baseDir, 'index.html')))
-app.get('/cadastrar', (req, res) => res.sendFile(path.join(baseDir, 'cadastrar.html')))
 
-// API Genérica
-app.post('/cadastrar/:tabela', async (req, res) => {
+// --- API GENÉRICA ---
+
+// CREATE: Insere em qualquer tabela
+app.post('/:tabela', async (req, res) => {
   try { res.status(201).json(await bd.inserir(req.params.tabela, req.body)) }
   catch (e) { res.status(400).json({ erro: e.message }) }
 })
 
-app.get('/consultar/:tabela/:id?', async (req, res) => {
+// READ: Ajuste para Express 5 (Parâmetro opcional usando array de rotas)
+// Isso resolve o erro "Unexpected ? at index..."
+app.get(['/:tabela', '/:tabela/:id'], async (req, res) => {
   try { res.json(await bd.ler(req.params.tabela, req.params.id)) }
   catch (e) { res.status(400).json({ erro: e.message }) }
 })
 
-app.put('/editar/:tabela/:id', async (req, res) => {
+// UPDATE: Atualiza baseado na PK dinâmica definida no bd.js
+app.put('/:tabela/:id', async (req, res) => {
   try { res.json(await bd.atualizar(req.params.tabela, req.body, req.params.id)) }
   catch (e) { res.status(400).json({ erro: e.message }) }
 })
 
-app.delete('/excluir/:tabela/:id', async (req, res) => {
+// DELETE: Remove baseado na PK dinâmica
+app.delete('/:tabela/:id', async (req, res) => {
   try { res.json(await bd.deletar(req.params.tabela, req.params.id)) }
   catch (e) { res.status(400).json({ erro: e.message }) }
 })
 
-app.listen(PORT, () => console.log(`🚀 http://localhost:${PORT}`))
+app.listen(PORT, () => console.log(`🚀 Server: http://localhost:${PORT}`))

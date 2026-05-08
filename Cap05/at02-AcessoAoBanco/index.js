@@ -8,8 +8,11 @@ const PORT = process.env.PORT || 3200
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const baseDir = path.join(__dirname, 'templates')
 
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+//interpreta dados vindos do corpo do formulários HTML
+app.use(express.urlencoded({ extended: true })) //extended: true permite interpretar dados complexos
+
+//interpreta requisições no formato JSON
+app.use(express.json()) //converte a string JSON em um objeto JavaScript
 
 // Rotas de Páginas
 app.get('/', (req, res) => res.sendFile(path.join(baseDir, 'index.html')))
