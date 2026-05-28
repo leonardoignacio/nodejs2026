@@ -1,5 +1,6 @@
 import mysql from 'mysql2/promise'
-
+import dotenv from 'dotenv'
+dotenv.config()
 // Configuração utilizando Pool para melhor performance e estabilidade
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',

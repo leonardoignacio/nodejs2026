@@ -3,6 +3,8 @@ import cors from 'cors'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import * as bd from './bd.js'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 const PORT = process.env.PORT || 3200
