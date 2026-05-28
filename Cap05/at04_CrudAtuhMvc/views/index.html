@@ -80,14 +80,15 @@
 
 <div class="container">
     <div class="tabs">
-        <button class="tab-btn active" onclick="openTab(event, 'usuarios')"><i class="fas fa-users"></i> USUÁRIOS & AUTH</button>
+        <button class="tab-btn active" onclick="openTab(event, 'auth')"><i class="fas fa-key"></i> LOGIN</button>
+        <button class="tab-btn" onclick="openTab(event, 'usuarios')"><i class="fas fa-users"></i> USUÁRIOS</button>
         <button class="tab-btn" onclick="openTab(event, 'pets')"><i class="fas fa-dog"></i> PETS</button>
         <button class="tab-btn" onclick="openTab(event, 'doacoes')"><i class="fas fa-hand-holding-heart"></i> DOAÇÕES</button>
     </div>
 
-    <div id="usuarios" class="tab-content active">
+    <div id="auth" class="tab-content active">
         <div class="card">
-            <h2>Gestão de Usuários e Autenticação</h2>
+            <h2>Autenticação</h2>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -99,8 +100,49 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td><span class="badge-public"><i class="fas fa-globe"></i> Pública</span></td><td><span class="verb post">POST</span></td><td><code>/login</code></td><td>Valida credenciais e retorna o Token JWT.</td></tr>
-                        <tr><td><span class="badge-public"><i class="fas fa-globe"></i> Pública</span></td><td><span class="verb post">POST</span></td><td><code>/usuarios</code></td><td>Cadastra um novo usuário no banco.</td></tr>
+                        <tr>
+                            <td><span class="badge-public"><i class="fas fa-globe"></i> Pública</span></td>
+                            <td><span class="verb post">POST</span></td>
+                            <td><code>/login</code></td>
+                            <td>Valida credenciais do usuário e retorna o Token JWT necessário para as rotas protegidas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="grid-docs">
+                <div>
+                    <h4>Exemplo JSON - Endpoint de Login</h4>
+                    <pre>{
+  "email": "leo@email.com",
+  "senha": "123"
+}</pre>
+                </div>
+                <div style="background: var(--light); padding: 1.5rem; border-radius: 8px;">
+                    <h4>Como usar o Token?</h4>
+                    <p>Ao fazer o login com sucesso, a API retornará um JSON contendo a propriedade <code>token</code>. Copie esse token.</p>
+                    <p>Para acessar as rotas protegidas das outras abas, adicione um Header na sua requisição HTTP com a seguinte estrutura:</p>
+                    <br>
+                    <code>Authorization: Bearer [COLE_O_TOKEN_AQUI]</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="usuarios" class="tab-content">
+        <div class="card">
+            <h2>Gestão de Usuários</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Acesso</th>
+                            <th>Método</th>
+                            <th>Endpoint</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><span class="badge-public"><i class="fas fa-globe"></i> Pública</span></td><td><span class="verb post">POST</span></td><td><code>/usuarios</code></td><td>Cadastra um novo usuário no banco de dados.</td></tr>
                         <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/usuarios</code></td><td>Lista todos os registros da tabela usuarios.</td></tr>
                         <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/usuarios/1</code></td><td>Busca um usuário específico pela Chave Primária.</td></tr>
                         <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/usuarios/1</code></td><td>Atualiza dados dinamicamente usando o ID.</td></tr>
@@ -110,10 +152,14 @@
             </div>
             <div class="grid-docs">
                 <div>
-                    <h4>Exemplo JSON - Login (Público)</h4>
+                    <h4>Exemplo JSON Completo (POST /usuarios)</h4>
                     <pre>{
+  "nome": "Leonardo Fernandes",
+  "cpf": "12345678901",
+  "telefone": "17999999999",
+  "whatsapp": "17988888888",
   "email": "leo@email.com",
-  "senha": "123"
+  "senha": "senha_segura_123"
 }</pre>
                     <br>
                     <h4>Exemplo JSON - PUT Atualizar (Protegido)</h4>
@@ -121,16 +167,17 @@
 Authorization: Bearer seu_token_jwt_aqui</span>
 {
   "nome": "Leonardo Fernandes Atualizado",
-  "telefone": "17999999999"
+  "telefone": "17888888888"
 }</pre>
                 </div>
                 <div style="background: var(--light); padding: 1.5rem; border-radius: 8px;">
                     <h4>Regras de Negócio</h4>
                     <ul>
-                        <li>O <strong>CPF</strong> deve ter exatamente 11 dígitos.</li>
-                        <li><strong>Email</strong> e <strong>CPF</strong> são campos únicos.</li>
-                        <li>A senha é automaticamente encriptada com BCrypt no cadastro (POST /usuarios).</li>
-                        <li>Excluir um usuário remove em cascata seus pets.</li>
+                        <li>O <strong>nome</strong>, <strong>cpf</strong>, <strong>email</strong> e <strong>senha</strong> são campos obrigatórios (`NOT NULL`).</li>
+                        <li>O <strong>cpf</strong> deve ter exatamente 11 caracteres.</li>
+                        <li><strong>email</strong> e <strong>cpf</strong> são campos únicos (`UNIQUE`).</li>
+                        <li>A <strong>senha</strong> é automaticamente encriptada no cadastro pelo Controller.</li>
+                        <li>Excluir um usuário (`DELETE`) remove em cascata seus pets devido à constraint `ON DELETE CASCADE`.</li>
                     </ul>
                 </div>
             </div>
@@ -151,17 +198,17 @@ Authorization: Bearer seu_token_jwt_aqui</span>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td><span class="badge-public"><i class="fas fa-globe"></i> Pública</span></td><td><span class="verb get">GET</span></td><td><code>/pets</code></td><td>Retorna a lista completa de animais (vitrine).</td></tr>
+                        <tr><td><span class="badge-public"><i class="fas fa-globe"></i> Pública</span></td><td><span class="verb get">GET</span></td><td><code>/pets</code></td><td>Retorna a lista completa de animais disponíveis.</td></tr>
                         <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb post">POST</span></td><td><code>/pets</code></td><td>Vincula um novo pet a um usuário existente.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/pets/10</code></td><td>Detalhes do animal pelo ID.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/pets/10</code></td><td>Atualiza status, peso ou observações.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/pets/10</code></td><td>Busca detalhes de um animal específico pelo ID.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/pets/10</code></td><td>Atualiza informações do pet.</td></tr>
                         <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb delete">DELETE</span></td><td><code>/pets/10</code></td><td>Exclui o animal do sistema.</td></tr>
                     </tbody>
                 </table>
             </div>
             <div class="grid-docs">
                 <div>
-                    <h4>Exemplo JSON (POST - Cadastro de Pet)</h4>
+                    <h4>Exemplo JSON Completo (POST /pets)</h4>
                     <pre><span class="header-req">// Requer no Header:
 Authorization: Bearer seu_token_jwt_aqui</span>
 {
@@ -170,17 +217,22 @@ Authorization: Bearer seu_token_jwt_aqui</span>
   "sexo": "M",
   "especie": "Cachorro",
   "raca": "Labrador",
-  "peso": 25.5,
+  "peso": 25.50,
   "tamanho": "Grande",
   "idade": 3,
   "doenca": "Nenhuma",
-  "obs": "Dócil e vacinado"
+  "obs": "Dócil, vacinado e vermifugado"
 }</pre>
                 </div>
                 <div style="background: var(--light); padding: 1.5rem; border-radius: 8px;">
-                    <h4>Dica de Integração</h4>
-                    <p>A listagem geral <code>GET /pets</code> é pública para permitir que qualquer visitante do site veja os animais disponíveis sem precisar criar conta. No entanto, para cadastrar ou alterar (<code>POST, PUT, DELETE</code>), o usuário precisa estar logado.</p>
-                    <p>O campo <code>id_cli</code> é a Chave Estrangeira que conecta o animal ao seu dono na tabela <code>usuarios</code>.</p>
+                    <h4>Dicas de Integração e Estrutura</h4>
+                    <p>A listagem geral <code>GET /pets</code> é pública para permitir que visitantes vejam a vitrine de adoção. Porém, para alterar dados, é obrigatório estar autenticado.</p>
+                    <p><strong>Constraints:</strong></p>
+                    <ul>
+                        <li>O <code>id_cli</code> é uma Chave Estrangeira. O usuário (dono) precisa existir na tabela de usuários.</li>
+                        <li>O <code>sexo</code> aceita apenas 'M' ou 'F'.</li>
+                        <li>Os campos <code>nome</code> e <code>especie</code> são obrigatórios.</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -202,31 +254,40 @@ Authorization: Bearer seu_token_jwt_aqui</span>
                     <tbody>
                         <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb post">POST</span></td><td><code>/doacoes</code></td><td>Registra uma nova intenção de adoção.</td></tr>
                         <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/doacoes</code></td><td>Consulta o histórico de todas as doações.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/doacoes/5</code></td><td>Finaliza a doação ou altera o status.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb delete">DELETE</span></td><td><code>/doacoes/5</code></td><td>Cancela o registro de doação.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/doacoes/5</code></td><td>Consulta os dados de um processo de doação específico.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/doacoes/5</code></td><td>Finaliza a doação ou altera o status (ex: Aguardando -> Concluído).</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb delete">DELETE</span></td><td><code>/doacoes/5</code></td><td>Cancela ou remove o registro de doação.</td></tr>
                     </tbody>
                 </table>
             </div>
             <div class="grid-docs">
                 <div>
-                    <h4>Exemplo JSON (Fase Final - PUT)</h4>
+                    <h4>Exemplo JSON Completo (POST /doacoes)</h4>
                     <pre><span class="header-req">// Requer no Header:
 Authorization: Bearer seu_token_jwt_aqui</span>
 {
   "id_pet": 10,
   "id_cli_interesse": 2,
-  "data_interesse": "2026-05-01",
-  "data_doacao": "2026-05-08",
-  "status": "Concluído"
+  "data_interesse": "2026-05-28",
+  "data_doacao": null,
+  "status": "Interessado"
+}</pre>
+                    <br>
+                    <h4>Exemplo JSON (PUT - Finalizar Doação)</h4>
+                    <pre><span class="header-req">// Requer no Header:
+Authorization: Bearer seu_token_jwt_aqui</span>
+{
+  "data_doacao": "2026-06-02",
+  "status": "Concluída"
 }</pre>
                 </div>
                 <div style="background: var(--light); padding: 1.5rem; border-radius: 8px;">
-                    <h4>Estados de Doação e Segurança</h4>
-                    <p>Todas as rotas de doação exigem autenticação (Token JWT), pois envolvem cruzamento de dados sensíveis entre quem doa e quem adota.</p>
+                    <h4>Regras do Fluxo de Doação</h4>
+                    <p>Todas as rotas de doação são <strong>protegidas</strong>, garantindo que apenas usuários registrados possam participar de processos de adoção.</p>
+                    <p><strong>Relacionamentos:</strong></p>
                     <ul>
-                        <li><strong>Interessado:</strong> Alguém quer adotar.</li>
-                        <li><strong>Em Análise:</strong> Entrevista em curso.</li>
-                        <li><strong>Concluído:</strong> O pet tem um novo lar!</li>
+                        <li>O <code>id_pet</code> garante que o processo se refira a um animal válido. Se o pet for deletado, a doação é apagada em cascata.</li>
+                        <li>O <code>id_cli_interesse</code> vincula o possível adotante. Se esse adotante apagar a conta, o campo na doação vira <code>NULL</code>, mas o histórico da doação do pet não é perdido (`ON DELETE SET NULL`).</li>
                     </ul>
                 </div>
             </div>
@@ -237,14 +298,17 @@ Authorization: Bearer seu_token_jwt_aqui</span>
 <script>
     function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
+        // Esconde todo o conteúdo das abas
         tabcontent = document.getElementsByClassName("tab-content");
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].classList.remove("active");
         }
+        // Remove a classe "active" dos botões
         tablinks = document.getElementsByClassName("tab-btn");
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].classList.remove("active");
         }
+        // Mostra a aba atual e adiciona classe "active" no botão clicado
         document.getElementById(tabName).classList.add("active");
         evt.currentTarget.classList.add("active");
     }
