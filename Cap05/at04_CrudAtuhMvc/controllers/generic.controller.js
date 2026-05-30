@@ -12,7 +12,7 @@ export const criar = async (req, res) => {
     }
 
     const result = await model.inserir(
-      req.params.tabela,
+      req.params.tabela || req.path.replace('/', ''),
       dados
     )
 
@@ -28,7 +28,7 @@ export const criar = async (req, res) => {
 export const listar = async (req, res) => {
   try {
     const result = await model.listar(
-      req.params.tabela,
+      req.params.tabela || req.path.replace('/', ''),
       req.params.id
     )
 

@@ -13,23 +13,8 @@ router.get('/pets', controller.listar)
 
 // Rotas protegidas
 router.post('/:tabela', autenticar, controller.criar)
-
-router.get(
-  ['/:tabela/:id', '/:tabela'],
-  autenticar,
-  controller.listar
-)
-
-router.put(
-  '/:tabela/:id',
-  autenticar,
-  controller.atualizar
-)
-
-router.delete(
-  '/:tabela/:id',
-  autenticar,
-  controller.remover
-)
+router.get(['/:tabela/:id', '/:tabela'], autenticar, controller.listar)
+router.put('/:tabela/:id', autenticar, controller.atualizar)
+router.delete('/:tabela/:id', autenticar, controller.remover)
 
 export default router
