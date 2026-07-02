@@ -104,7 +104,7 @@
                             <td><span class="badge-public"><i class="fas fa-globe"></i> Pública</span></td>
                             <td><span class="verb post">POST</span></td>
                             <td><code>/login</code></td>
-                            <td>Valida credenciais do usuário e retorna o Token JWT necessário para as rotas protegidas.</td>
+                            <td>Valida credenciais do usuário (e-mail e senha) e retorna o Token JWT necessário para as rotas protegidas.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -114,7 +114,7 @@
                     <h4>Exemplo JSON - Endpoint de Login</h4>
                     <pre>{
   "email": "leo@email.com",
-  "senha": "123"
+  "senha": "senha_segura_123"
 }</pre>
                 </div>
                 <div style="background: var(--light); padding: 1.5rem; border-radius: 8px;">
@@ -143,10 +143,10 @@
                     </thead>
                     <tbody>
                         <tr><td><span class="badge-public"><i class="fas fa-globe"></i> Pública</span></td><td><span class="verb post">POST</span></td><td><code>/usuarios</code></td><td>Cadastra um novo usuário no banco de dados.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/usuarios</code></td><td>Lista todos os registros da tabela usuarios.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/usuarios/1</code></td><td>Busca um usuário específico pela Chave Primária.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/usuarios/1</code></td><td>Atualiza dados dinamicamente usando o ID.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb delete">DELETE</span></td><td><code>/usuarios/1</code></td><td>Remove o registro permanentemente.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/usuario</code></td><td>Lista todos os registros da tabela usuarios.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/usuario/1</code></td><td>Busca um usuário específico pela Chave Primária.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/usuario/1</code></td><td>Atualiza dados dinamicamente usando o ID.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb delete">DELETE</span></td><td><code>/usuario/1</code></td><td>Remove o registro permanentemente.</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -171,13 +171,12 @@ Authorization: Bearer seu_token_jwt_aqui</span>
 }</pre>
                 </div>
                 <div style="background: var(--light); padding: 1.5rem; border-radius: 8px;">
-                    <h4>Regras de Negócio</h4>
+                    <h4>Regras de Negócio e Segurança</h4>
                     <ul>
-                        <li>O <strong>nome</strong>, <strong>cpf</strong>, <strong>email</strong> e <strong>senha</strong> são campos obrigatórios (`NOT NULL`).</li>
-                        <li>O <strong>cpf</strong> deve ter exatamente 11 caracteres.</li>
+                        <li>O <strong>nome</strong>, <strong>cpf</strong>, <strong>email</strong> e <strong>senha</strong> são campos obrigatórios.</li>
                         <li><strong>email</strong> e <strong>cpf</strong> são campos únicos (`UNIQUE`).</li>
-                        <li>A <strong>senha</strong> é automaticamente encriptada no cadastro pelo Controller.</li>
-                        <li>Excluir um usuário (`DELETE`) remove em cascata seus pets devido à constraint `ON DELETE CASCADE`.</li>
+                        <li>A <strong>senha</strong> é automaticamente criptografada (Hash irreversível usando Bcrypt) no momento do cadastro. O payload de retorno omite a senha por segurança.</li>
+                        <li>Excluir um usuário (`DELETE`) remove em cascata seus pets cadastrados (`ON DELETE CASCADE`).</li>
                     </ul>
                 </div>
             </div>
@@ -186,7 +185,7 @@ Authorization: Bearer seu_token_jwt_aqui</span>
 
     <div id="pets" class="tab-content">
         <div class="card">
-            <h2>Gestão de Animais</h2>
+            <h2>Gestão de Animais (Pets)</h2>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -198,21 +197,20 @@ Authorization: Bearer seu_token_jwt_aqui</span>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td><span class="badge-public"><i class="fas fa-globe"></i> Pública</span></td><td><span class="verb get">GET</span></td><td><code>/pets</code></td><td>Retorna a lista completa de animais disponíveis.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb post">POST</span></td><td><code>/pets</code></td><td>Vincula um novo pet a um usuário existente.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/pets/10</code></td><td>Busca detalhes de um animal específico pelo ID.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/pets/10</code></td><td>Atualiza informações do pet.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb delete">DELETE</span></td><td><code>/pets/10</code></td><td>Exclui o animal do sistema.</td></tr>
+                        <tr><td><span class="badge-public"><i class="fas fa-globe"></i> Pública</span></td><td><span class="verb get">GET</span></td><td><code>/vitrine</code></td><td>Retorna a lista completa de TODOS os animais disponíveis no sistema.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/pet</code></td><td>Lista <strong>exclusivamente</strong> os pets cadastrados pelo usuário autenticado.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb post">POST</span></td><td><code>/pet</code></td><td>Cadastra um novo pet (O dono é vinculado automaticamente pelo Token).</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/pet/10</code></td><td>Atualiza informações do pet. Falha se o usuário não for o dono.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb delete">DELETE</span></td><td><code>/pet/10</code></td><td>Exclui o animal do sistema. Falha se o usuário não for o dono.</td></tr>
                     </tbody>
                 </table>
             </div>
             <div class="grid-docs">
                 <div>
-                    <h4>Exemplo JSON Completo (POST /pets)</h4>
+                    <h4>Exemplo JSON Completo (POST /pet)</h4>
                     <pre><span class="header-req">// Requer no Header:
 Authorization: Bearer seu_token_jwt_aqui</span>
 {
-  "id_cli": 1,
   "nome": "Rex",
   "sexo": "M",
   "especie": "Cachorro",
@@ -225,13 +223,12 @@ Authorization: Bearer seu_token_jwt_aqui</span>
 }</pre>
                 </div>
                 <div style="background: var(--light); padding: 1.5rem; border-radius: 8px;">
-                    <h4>Dicas de Integração e Estrutura</h4>
-                    <p>A listagem geral <code>GET /pets</code> é pública para permitir que visitantes vejam a vitrine de adoção. Porém, para alterar dados, é obrigatório estar autenticado.</p>
-                    <p><strong>Constraints:</strong></p>
+                    <h4>Arquitetura de "Ownership" (Posse)</h4>
+                    <p>O gerenciamento de pets possui travas rigorosas de segurança implementadas na API:</p>
                     <ul>
-                        <li>O <code>id_cli</code> é uma Chave Estrangeira. O usuário (dono) precisa existir na tabela de usuários.</li>
-                        <li>O <code>sexo</code> aceita apenas 'M' ou 'F'.</li>
-                        <li>Os campos <code>nome</code> e <code>especie</code> são obrigatórios.</li>
+                        <li>Não é mais necessário enviar o campo <code>id_cli</code> no JSON de cadastro. A API extrai a identidade do criador diretamente do Token JWT.</li>
+                        <li>A rota <code>/vitrine</code> exibe dados globais para visitantes anônimos ou logados.</li>
+                        <li>As rotas de alteração (`PUT` e `DELETE /pet`) validam no banco de dados se o pet solicitado pertence ao usuário logado antes de executar a transação.</li>
                     </ul>
                 </div>
             </div>
@@ -252,17 +249,17 @@ Authorization: Bearer seu_token_jwt_aqui</span>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb post">POST</span></td><td><code>/doacoes</code></td><td>Registra uma nova intenção de adoção.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/doacoes</code></td><td>Consulta o histórico de todas as doações.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/doacoes/5</code></td><td>Consulta os dados de um processo de doação específico.</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/doacoes/5</code></td><td>Finaliza a doação ou altera o status (ex: Aguardando -> Concluído).</td></tr>
-                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb delete">DELETE</span></td><td><code>/doacoes/5</code></td><td>Cancela ou remove o registro de doação.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb post">POST</span></td><td><code>/doacao</code></td><td>Registra uma nova intenção de adoção.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/doacao</code></td><td>Consulta o histórico de todas as doações.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb get">GET</span></td><td><code>/doacao/5</code></td><td>Consulta os dados de um processo de doação específico.</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb put">PUT</span></td><td><code>/doacao/5</code></td><td>Finaliza a doação ou altera o status (ex: Aguardando -> Concluído).</td></tr>
+                        <tr><td><span class="badge-protected"><i class="fas fa-lock"></i> Protegida</span></td><td><span class="verb delete">DELETE</span></td><td><code>/doacao/5</code></td><td>Cancela ou remove o registro de doação.</td></tr>
                     </tbody>
                 </table>
             </div>
             <div class="grid-docs">
                 <div>
-                    <h4>Exemplo JSON Completo (POST /doacoes)</h4>
+                    <h4>Exemplo JSON Completo (POST /doacao)</h4>
                     <pre><span class="header-req">// Requer no Header:
 Authorization: Bearer seu_token_jwt_aqui</span>
 {
