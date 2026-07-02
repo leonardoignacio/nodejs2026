@@ -259,13 +259,11 @@ Authorization: Bearer seu_token_jwt_aqui</span>
             </div>
             <div class="grid-docs">
                 <div>
-                    <h4>Exemplo JSON Completo (POST /doacao)</h4>
+                    <h4>Exemplo JSON Simplificado (POST /doacao)</h4>
                     <pre><span class="header-req">// Requer no Header:
 Authorization: Bearer seu_token_jwt_aqui</span>
 {
   "id_pet": 10,
-  "id_cli_interesse": 2,
-  "data_interesse": "2026-05-28",
   "data_doacao": null,
   "status": "Interessado"
 }</pre>
@@ -279,12 +277,12 @@ Authorization: Bearer seu_token_jwt_aqui</span>
 }</pre>
                 </div>
                 <div style="background: var(--light); padding: 1.5rem; border-radius: 8px;">
-                    <h4>Regras do Fluxo de Doação</h4>
-                    <p>Todas as rotas de doação são <strong>protegidas</strong>, garantindo que apenas usuários registrados possam participar de processos de adoção.</p>
-                    <p><strong>Relacionamentos:</strong></p>
+                    <h4>Automação e Regras do Fluxo</h4>
+                    <p>O fluxo de doação foi otimizado para evitar falhas e manipulações:</p>
                     <ul>
+                        <li><strong>Injeção de Identidade:</strong> Não é mais necessário enviar o campo <code>id_cli_interesse</code>. A API captura automaticamente o ID do usuário que realizou a requisição a partir do Token JWT.</li>
+                        <li><strong>Timestamp Automático:</strong> O campo <code>data_interesse</code> não deve ser enviado no JSON. A API gera automaticamente a data e hora atual do servidor em formato ISO-8601 UTC (Fuso 0) no momento da criação.</li>
                         <li>O <code>id_pet</code> garante que o processo se refira a um animal válido. Se o pet for deletado, a doação é apagada em cascata.</li>
-                        <li>O <code>id_cli_interesse</code> vincula o possível adotante. Se esse adotante apagar a conta, o campo na doação vira <code>NULL</code>, mas o histórico da doação do pet não é perdido (`ON DELETE SET NULL`).</li>
                     </ul>
                 </div>
             </div>
