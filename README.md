@@ -1,18 +1,49 @@
 # NodeJS 2026 - Curso de Back-end com Node.js
 
-Este repositório é uma coleção de atividades práticas e exemplos organizados por capítulos para aprendizagem de desenvolvimento back-end com Node.js. Cada capítulo apresenta conceitos e implementações progressivas, começando por aplicações simples e avançando para APIs completas, segurança, validação, testes e integração com serviços externos.
+Este repositório reúne atividades práticas e exemplos organizados por capítulos para aprender desenvolvimento back-end com Node.js. O conteúdo evolui desde scripts básicos até APIs completas, com foco em segurança, testes, banco de dados e documentação.
 
 ## Estrutura do repositório
 
-- `Cap01/` - Fundamentos do Node.js e primeiros scripts.
-- `Cap02/` - Manipulação de arquivos, variáveis de ambiente, módulos e rotas básicas.
-- `Cap03/` - Criação de aplicações HTTP simples e renderização de HTML.
-- `Cap04/` - Introdução ao Express e implementação de APIs REST.
-- `Cap05/` - Conexão com banco de dados, CRUD completo e exemplos com ORM.
-- `Cap06/` - Ajustes de API, validação de dados, testes, segurança e logs.
-- `Cap07/` - Atividades avançadas com segurança, tratamento de erros, upload de imagens Cloudinary, testes avançados e documentação Swagger.
+- [Cap01](Cap01/) - Fundamentos do Node.js e primeiros scripts.
+- [Cap02](Cap02/) - Manipulação de arquivos, variáveis de ambiente, módulos e rotas básicas.
+- [Cap03](Cap03/) - Criação de aplicações HTTP simples e renderização de HTML.
+- [Cap04](Cap04/) - Introdução ao Express e implementação de APIs REST.
+- [Cap05](Cap05/) - Conexão com banco de dados, CRUD completo e exemplos com ORM.
+- [Cap06](Cap06/) - Ajustes de API, validação de dados, testes, segurança e logs.
+- [Cap07](Cap07/) - Atividades avançadas com segurança, tratamento de erros, upload de imagens Cloudinary, testes avançados e documentação Swagger.
 
-Cada capítulo contém um arquivo `readme.md` com descrição de conteúdo, objetivos e instruções de execução.
+Cada capítulo contém um README com descrição, objetivos e instruções de execução.
+
+## Configuração geral
+
+1. Clone o repositório:
+   ```bash
+   git clone <url-do-repositorio>
+   ```
+2. Acesse a pasta do projeto:
+   ```bash
+   cd nodejs2026
+   ```
+3. Instale as dependências da atividade desejada:
+   ```bash
+   npm install
+   ```
+4. Crie um arquivo `.env` com as variáveis necessárias para o capítulo que você for executar.
+5. Inicie o servidor ou rode o script correspondente:
+   ```bash
+   node server.js
+   ```
+   ou
+   ```bash
+   node <arquivo>.js
+   ```
+
+## Variáveis de ambiente por capítulo
+
+- Cap01, Cap02, Cap03 e Cap04: nenhuma variável de ambiente é obrigatória para os exemplos básicos.
+- Cap05: `PORT`, `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`.
+- Cap06: `PORT`, `DATABASE_URL`, `JWT_SECRET`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, `CLOUDINARY_FOLDER`.
+- Cap07: `PORT`, `DATABASE_URL`, `JWT_SECRET`, `JWT_EXPIRATION`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, `CLOUDINARY_FOLDER`, `CORS_ORIGIN`, `BASE_URL`.
 
 ## Tecnologias utilizadas
 
@@ -36,31 +67,11 @@ Cada capítulo contém um arquivo `readme.md` com descrição de conteúdo, obje
 5. Implementar testes automatizados para garantir a qualidade do código.
 6. Documentar APIs com Swagger para facilitar uso e manutenção.
 
-## Como usar
-
-1. Clone o repositório:
-   ```bash
-   git clone <url-do-repositorio>
-   ```
-2. Acesse o diretório do projeto:
-   ```bash
-   cd nodejs2026
-   ```
-3. Instale dependências em cada atividade que deseje executar:
-   ```bash
-   npm install
-   ```
-4. Configure variáveis de ambiente conforme os exemplos `*.env.example` em cada capítulo.
-5. Inicie o servidor da atividade desejada com:
-   ```bash
-   node server.js
-   ```
-
 ## Observações
 
 - Cada capítulo e atividade possui seu próprio `package.json`, arquivos de configuração e dependências.
-- As atividades de `Cap07` apresentam nomes de diretório com descrições em português sem acentos para facilitar a compreensão do foco de cada módulo.
-- Use o arquivo `Introdução - Desenvolvedor Web Back-end_Node_js.pdf` como suporte teórico ao conteúdo prático.
+- Os exercícios de Cap07 usam nomes de diretório em português para facilitar a compreensão do foco de cada módulo.
+- Consulte o arquivo `Introdução - Desenvolvedor Web Back-end_Node_js.pdf` como suporte teórico.
 
 ## Contato
 

@@ -1,5 +1,7 @@
 # Cap01 - Fundamentos do Node.js
 
+[⬅ Voltar ao projeto principal](../README.md)
+
 Este capítulo apresenta os primeiros conceitos de Node.js e scripts básicos de execução.
 
 ## Conteúdo
@@ -10,11 +12,18 @@ Este capítulo apresenta os primeiros conceitos de Node.js e scripts básicos de
 - Executar scripts Node.js simples
 - Entender o ambiente de execução do Node
 
-## Como executar
+## Configuração
+- Pré-requisito: ter o Node.js instalado.
+- Não há dependências externas nem variáveis de ambiente obrigatórias.
+
+## Comandos
 ```bash
 node Cap01/at02-OlaMundo.js
 node Cap01/at03-OlaMundo2.js
 ```
 
+## Variáveis de ambiente
+Nenhuma variável de ambiente é necessária para este capítulo.
+
 ## Observações
-Não há dependências externas nesse capítulo. Basta ter o Node.js instalado.
+Basta ter o Node.js instalado para executar os exemplos.
