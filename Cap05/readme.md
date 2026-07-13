@@ -8,7 +8,7 @@ Este capítulo introduz acesso a banco de dados, criação de esquemas SQL e ope
 - `at01-CreateDatabase/`
 - `at02-AcessoAoBanco/`
 - `at03-CrudCompleto/`
-- `at04_CrudAtuhMvc/`
+- `at04_CrudAuthMvc/`
 - `at05_CrudORMPrisma/`
 
 ## Objetivos
