@@ -9,7 +9,7 @@ Atividade que demonstra um CRUD com autenticação e arquitetura MVC.
 
 ## Como executar
 ```bash
-cd Cap05/at04_CrudAtuhMvc
+cd Cap05/at04_CrudAuthMvc
 npm install
 node server.js
 ```
