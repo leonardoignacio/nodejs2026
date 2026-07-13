@@ -5,9 +5,9 @@
 Neste capítulo, são criadas aplicações HTTP simples e páginas HTML renderizadas a partir de Node.js.
 
 ## Conteúdo
-- `at01-olaMundo.js`
-- `at02-parametrosURL.js`
-- `at03-RenderHTML/`
+- `at01_olaMundo.js`
+- `at02_parametrosURL.js`
+- `at03_RenderHTML/`
 
 ## Objetivos
 - Criar um servidor HTTP básico
@@ -20,7 +20,7 @@ Neste capítulo, são criadas aplicações HTTP simples e páginas HTML renderiz
 
 ## Comandos
 ```bash
-node Cap03/at01-olaMundo.js
+node Cap03/at01_olaMundo.js
 ```
 
 ## Variáveis de ambiente

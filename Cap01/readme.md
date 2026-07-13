@@ -5,8 +5,8 @@
 Este capítulo apresenta os primeiros conceitos de Node.js e scripts básicos de execução.
 
 ## Conteúdo
-- `at02-OlaMundo.js`
-- `at03-OlaMundo2.js`
+- `at02_OlaMundo.js`
+- `at03_OlaMundo2.js`
 
 ## Objetivos
 - Executar scripts Node.js simples
@@ -18,8 +18,8 @@ Este capítulo apresenta os primeiros conceitos de Node.js e scripts básicos de
 
 ## Comandos
 ```bash
-node Cap01/at02-OlaMundo.js
-node Cap01/at03-OlaMundo2.js
+node Cap01/at02_OlaMundo.js
+node Cap01/at03_OlaMundo2.js
 ```
 
 ## Variáveis de ambiente

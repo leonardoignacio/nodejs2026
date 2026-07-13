@@ -1,4 +1,4 @@
-# Cap04 - at01-ExpressHTTP
+# Cap04 - at01_ExpressHTTP
 
 Esta atividade introduz o uso do Express para criar um servidor HTTP simples.
 
@@ -9,7 +9,7 @@ Esta atividade introduz o uso do Express para criar um servidor HTTP simples.
 
 ## Como executar
 ```bash
-cd Cap04/at01-ExpressHTTP
+cd Cap04/at01_ExpressHTTP
 npm install
 node server.js
 ```

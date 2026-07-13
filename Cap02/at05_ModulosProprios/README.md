@@ -1,4 +1,4 @@
-# Cap02 - at05-ModulosProprios
+# Cap02 - at05_ModulosProprios
 
 Esta atividade demonstra a criação e o uso de módulos próprios em Node.js.
 
@@ -9,7 +9,7 @@ Esta atividade demonstra a criação e o uso de módulos próprios em Node.js.
 
 ## Como executar
 ```bash
-node Cap02/at05-ModulosProprios/index.js
+node Cap02/at05_ModulosProprios/index.js
 ```
 
 ## Observações

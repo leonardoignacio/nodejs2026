@@ -1,4 +1,4 @@
-# Cap04 - at03-QueryParams
+# Cap04 - at03_QueryParams
 
 Esta atividade trabalha com query parameters em rotas Express.
 
@@ -9,7 +9,7 @@ Esta atividade trabalha com query parameters em rotas Express.
 
 ## Como executar
 ```bash
-cd Cap04/at03-QueryParams
+cd Cap04/at03_QueryParams
 npm install
 node index.js
 ```

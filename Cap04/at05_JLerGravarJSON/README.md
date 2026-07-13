@@ -1,4 +1,4 @@
-# Cap04 - at05 - JLerGravarJSON
+# Cap04 - at05_JLerGravarJSON
 
 Esta atividade demonstra leitura e gravação de arquivos JSON em uma aplicação Express.
 
@@ -8,7 +8,7 @@ Esta atividade demonstra leitura e gravação de arquivos JSON em uma aplicaçã
 
 ## Como executar
 ```bash
-cd Cap04/at05 - JLerGravarJSON
+cd Cap04/at05_JLerGravarJSON
 npm install
 node index.js
 ```

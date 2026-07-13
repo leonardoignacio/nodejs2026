@@ -70,7 +70,6 @@ Cada capítulo contém um README com descrição, objetivos e instruções de ex
 ## Observações
 
 - Cada capítulo e atividade possui seu próprio `package.json`, arquivos de configuração e dependências.
-- Os exercícios de Cap07 usam nomes de diretório em português para facilitar a compreensão do foco de cada módulo.
 - Consulte o arquivo `Introdução - Desenvolvedor Web Back-end_Node_js.pdf` como suporte teórico.
 
 ## Contato

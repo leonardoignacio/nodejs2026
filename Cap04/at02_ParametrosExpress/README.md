@@ -1,4 +1,4 @@
-# Cap04 - at02-ParametrosExpress
+# Cap04 - at02_ParametrosExpress
 
 Esta atividade mostra como capturar parâmetros de rota no Express.
 
@@ -9,7 +9,7 @@ Esta atividade mostra como capturar parâmetros de rota no Express.
 
 ## Como executar
 ```bash
-cd Cap04/at02-ParametrosExpress
+cd Cap04/at02_ParametrosExpress
 npm install
 node server.js
 ```

@@ -1,4 +1,4 @@
-# Cap02 - at02Extra-VariaveisDeAmbiente
+# Cap02 - at02Extra_VariaveisDeAmbiente
 
 Esta atividade mostra como usar variáveis de ambiente no Node.js para configurar o comportamento da aplicação sem alterar o código.
 
@@ -8,7 +8,7 @@ Esta atividade mostra como usar variáveis de ambiente no Node.js para configura
 
 ## Como executar
 ```bash
-node Cap02/at02Extra-VariaveisDeAmbiente/at02-Extra-VariaveisDeAmbiente.js
+node Cap02/at02Extra_VariaveisDeAmbiente/at02_Extra_VariaveisDeAmbiente.js
 ```
 
 ## Observações

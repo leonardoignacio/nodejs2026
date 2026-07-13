@@ -5,11 +5,11 @@
 Capítulo focado em Express, rotas, parâmetros, query strings e renderização de HTML.
 
 ## Conteúdo
-- `at01-ExpressHTTP/`
-- `at02-ParametrosExpress/`
-- `at03-QueryParams/`
-- `at04-RenderizandoHTML/`
-- `at05 - JLerGravarJSON/`
+- `at01_ExpressHTTP/`
+- `at02_ParametrosExpress/`
+- `at03_QueryParams/`
+- `at04_RenderizandoHTML/`
+- `at05_JLerGravarJSON/`
 
 ## Objetivos
 - Usar Express para criar APIs REST
@@ -23,7 +23,7 @@ Capítulo focado em Express, rotas, parâmetros, query strings e renderização 
 
 ## Comandos
 ```bash
-cd Cap04/at01-ExpressHTTP
+cd Cap04/at01_ExpressHTTP
 npm install
 node server.js
 ```

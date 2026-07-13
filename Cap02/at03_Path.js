@@ -1,5 +1,5 @@
 const path =require('path')
-let arquivo='./at03-Path.js'
+let arquivo='./at03_Path.js'
 
 console.log('Extensão: ', path.extname(arquivo))
 console.log('nome completo: ', path.basename(arquivo))

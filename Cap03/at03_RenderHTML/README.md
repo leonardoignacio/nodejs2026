@@ -1,4 +1,4 @@
-# Cap03 - at03-RenderHTML
+# Cap03 - at03_RenderHTML
 
 Esta atividade demonstra como renderizar páginas HTML simples a partir de um servidor Node.js.
 
@@ -8,7 +8,7 @@ Esta atividade demonstra como renderizar páginas HTML simples a partir de um se
 
 ## Como executar
 ```bash
-node Cap03/at03-RenderHTML/index.js
+node Cap03/at03_RenderHTML/index.js
 ```
 
 ## Observações
