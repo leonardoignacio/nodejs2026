@@ -1,4 +1,4 @@
-# Cap05 - at04_CrudAtuhMvc
+# Cap05 - at04_CrudAuthMvc
 
 Atividade que demonstra um CRUD com autenticação e arquitetura MVC.
 
