@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 
 import authRoutes from './routes/auth.routes.js'
 import genericRoutes from './routes/generic.routes.js'
+import imagesRoutes from './routes/images.routes.js'
 
 const app = express()
 
@@ -36,5 +37,6 @@ app.use('/', authRoutes)
 
 // Rotas da API
 app.use('/', genericRoutes)
+app.use('/', imagesRoutes)
 
 export default app

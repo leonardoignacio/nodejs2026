@@ -68,3 +68,18 @@ model Doacao {
 
   @@map("doacoes")
 }
+
+// ==========================================
+// TABELA: imagens dos pets
+// ==========================================
+model PetImage {
+  id        Int      @id @default(autoincrement())
+  petId     Int
+  url       String   @db.VarChar(500)
+  publicId  String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+
+  pet Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
+
+  @@map("pet_images")
+}
